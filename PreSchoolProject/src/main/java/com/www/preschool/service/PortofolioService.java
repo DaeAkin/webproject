@@ -11,8 +11,5 @@ public interface PortofolioService {
 	
 	void insert();
 	
-	
-	
-	
 
 }
