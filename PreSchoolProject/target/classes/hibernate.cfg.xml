@@ -5,12 +5,12 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://kei890.iptime.org:3306/hibernatetest</property>
+        <property name="hibernate.connection.url">jdbc:mysql://kei890.iptime.org:3306/webpj</property>
         <property name="hibernate.connection.password">1234</property>
         <property name="hibernate.connection.username">webpj</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
-        <mapping resource = "ProtfolioDto.hbm.xml"/>
+        <mapping resource = "Portofolio.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
