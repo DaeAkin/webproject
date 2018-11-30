@@ -1,8 +1,5 @@
 package com.www.preschool.dto;
 
-import java.util.Date;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 //모든 필드를 생성자에 넣어줌 
 @AllArgsConstructor
-public class PortofolioDto {
+public class PortfolioDto {
 
 	private int no;
 	

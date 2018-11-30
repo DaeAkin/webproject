@@ -4,7 +4,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name = "com.www.preschool.dto.PortofolioDto" table = "portfolio">
+   <class name = "com.www.preschool.dto.PortfolioDto" table = "portfolio">
       
       <meta attribute = "class-description">
          하이버네이트 포토폴리오 
