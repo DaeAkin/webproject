@@ -1,6 +1,9 @@
 package com.www.preschool.test;
 
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -29,12 +32,13 @@ public class PortflioServiceTest {
 	// DB에 넣고 가져오기 테스트  
 	@Test
 	public void addAndGet() {
-//		portfolioService.insert(portfolio);
+		portfolioService.insert(portfolio);
+		assertThat(portfolio.getTitle(), is("asd"));
 		
-		List<PortfolioDto> portfolioDtos = 
-				portfolioService.getAllList();
-		
-		System.out.println("????" + portfolioDtos.size());
+//		List<PortfolioDto> portfolioDtos = 
+//				portfolioService.getAllList();
+//		
+//		System.out.println("????" + portfolioDtos.size());
 		
 		
 	}
