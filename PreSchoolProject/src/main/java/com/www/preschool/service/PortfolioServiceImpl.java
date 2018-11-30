@@ -1,5 +1,7 @@
 package com.www.preschool.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +18,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 	ImageUploadUtil imageUploadUtil;
 	
 	@Autowired
-	PortfolioDao portofolioDao = new PortfolioDaoImpl();
+	PortfolioDao portfolioDao = new PortfolioDaoImpl();
 	
 	@Override
 	public void imageUpload(MultipartFile file) {
@@ -32,7 +34,13 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public int insert(PortfolioDto portofolio) {
 		System.out.println("insert service ");
-		return portofolioDao.addPortofolio(portofolio);
+		return portfolioDao.addPortofolio(portofolio);
+	}
+
+	@Override
+	public List<PortfolioDto> getAllList() {
+		
+		return portfolioDao.getAllList();
 	}
 
 	

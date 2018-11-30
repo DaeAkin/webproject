@@ -2,6 +2,7 @@ package com.www.preschool.test;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,12 @@ public class PortflioServiceTest {
 	// DB에 넣고 가져오기 테스트  
 	@Test
 	public void addAndGet() {
-		portfolioService.insert(portfolio);
+//		portfolioService.insert(portfolio);
+		
+		List<PortfolioDto> portfolioDtos = 
+				portfolioService.getAllList();
+		
+		System.out.println("????" + portfolioDtos.size());
 		
 		
 	}

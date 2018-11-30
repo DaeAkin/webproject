@@ -48,19 +48,17 @@ public class DbOperations {
        return portofolioID;
     }
     
-    public void listEmployees( ){
+    // 포토폴리오의 모든 리스트를 가져오는 함수
+    public List<PortfolioDto> getAllList( ){
         Session session = factory.openSession();
         Transaction tx = null;
+        List<PortfolioDto> portfolioDtos = null;
         
         try {
+        	System.out.println(" 포토폴리오 모든 리스트 ");
            tx = session.beginTransaction();
-           List<PortfolioDto> = session.createQuery("FROM Porto").list(); 
-           for (Iterator iterator = employees.iterator(); iterator.hasNext();){
-              Employee employee = (Employee) iterator.next(); 
-              System.out.print("First Name: " + employee.getFirstName()); 
-              System.out.print("  Last Name: " + employee.getLastName()); 
-              System.out.println("  Salary: " + employee.getSalary()); 
-           }
+           portfolioDtos = session.createQuery("FROM portfolio").list(); 
+
            tx.commit();
         } catch (HibernateException e) {
            if (tx!=null) tx.rollback();
@@ -68,7 +66,30 @@ public class DbOperations {
         } finally {
            session.close(); 
         }
+        
+        return portfolioDtos;
      }
+    
+//    public List<PortfolioDto> selectOne( ){
+//        Session session = factory.openSession();
+//        Transaction tx = null;
+//        PortfolioDto portfolioDto = null;
+//        
+//        try {
+//           tx = session.beginTransaction();
+//           portfolioDto = session.
+//
+//           tx.commit();
+//        } catch (HibernateException e) {
+//           if (tx!=null) tx.rollback();
+//           e.printStackTrace(); 
+//        } finally {
+//           session.close(); 
+//        }
+//        
+//        return portfolioDtos;
+//     }
+    
     
     
 
