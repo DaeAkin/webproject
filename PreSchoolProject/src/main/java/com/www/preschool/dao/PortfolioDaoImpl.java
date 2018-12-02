@@ -4,13 +4,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.www.preschool.db.DbOperations;
 import com.www.preschool.dto.PortfolioDto;
-import com.www.preschool.utils.DbOperations;
 
 @Repository("portofolioDao")
 public class PortfolioDaoImpl implements PortfolioDao{
-
+	
+	
+	public void setXmlLocation(String xmlLocation) {
+		dbOperation.setXmlLocation(xmlLocation);
+	}
+	
 	DbOperations dbOperation = new DbOperations();
+	
+	
 	
 	@Override
 	public int addPortofolio(PortfolioDto portofolio) {
