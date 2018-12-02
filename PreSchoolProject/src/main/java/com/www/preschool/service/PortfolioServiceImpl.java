@@ -43,6 +43,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 		return portfolioDao.getAllList();
 	}
 
+	@Override
+	public void deleteAllContent() {
+		portfolioDao.deleteAllContent();
+		
+	}
+
 	
 
 }

@@ -25,4 +25,10 @@ public class PortfolioDaoImpl implements PortfolioDao{
 		return dbOperation.getAllList();
 	}
 
+	@Override
+	public void deleteAllContent() {
+		
+		dbOperation.deleteAllContent();
+	}
+
 }

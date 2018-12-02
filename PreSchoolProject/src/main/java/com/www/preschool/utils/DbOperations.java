@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.HibernateException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -60,8 +63,9 @@ public class DbOperations {
         try {
         	System.out.println(" 포토폴리오 모든 리스트 ");
            tx = session.beginTransaction();
-           portfolioDtos = session.createQuery("FROM portfolio").list(); 
 
+           portfolioDtos = session.createNativeQuery("select * from portfolio").list();
+           	
            tx.commit();
         } catch (HibernateException e) {
            if (tx!=null) tx.rollback();
@@ -72,6 +76,31 @@ public class DbOperations {
         
         return portfolioDtos;
      }
+    
+    //포토폴리오 테이블의 데이터를 전부 삭제
+    public void deleteAllContent() {
+        Session session = factory.openSession();
+        Transaction tx = null;
+     
+        
+        try {
+        	System.out.println(" 포토폴리오 모든 리스트 ");
+           tx = session.beginTransaction();
+
+           session.createNativeQuery("delete from portfolio").executeUpdate();
+           
+           	
+           tx.commit();
+        } catch (HibernateException e) {
+           if (tx!=null) tx.rollback();
+           e.printStackTrace(); 
+        } finally {
+           session.close(); 
+        }
+       
+    }
+    
+    
     
 //    public List<PortfolioDto> selectOne( ){
 //        Session session = factory.openSession();
