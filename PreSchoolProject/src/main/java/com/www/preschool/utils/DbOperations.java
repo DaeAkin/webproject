@@ -19,7 +19,10 @@ public class DbOperations {
    
     	
        static { try {
-            factory = new Configuration().configure().buildSessionFactory();
+            factory = new Configuration().
+            		configure().
+            		addAnnotatedClass(PortfolioDto.class).
+            		buildSessionFactory();
            
          } catch (Throwable ex) { 
             System.err.println("Failed to create sessionFactory object." + ex);
