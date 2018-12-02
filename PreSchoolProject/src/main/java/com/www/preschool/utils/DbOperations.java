@@ -16,12 +16,14 @@ import org.hibernate.cfg.Configuration;
 
 import com.www.preschool.dto.PortfolioDto;
 
+import sun.net.www.content.text.plain;
+
 public class DbOperations {
 	private static SessionFactory factory; 
 
-   
+	private SessionFactory buildSessionFacotry() {
     	
-       static { try {
+       try {
             factory = new Configuration().
             		configure().
             		addAnnotatedClass(PortfolioDto.class).
@@ -31,12 +33,14 @@ public class DbOperations {
             System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex); 
          }
-       }
+       return factory;
+	}
+       
     
     
     /* 데이터베이스에 Portofolio 추가하는 메소드 */
     public Integer addPortofolio(PortfolioDto portfolio){
-    
+    	buildSessionFacotry();
        Session session = factory.openSession();
        Transaction tx = null;
        Integer portofolioID = null;
@@ -56,6 +60,7 @@ public class DbOperations {
     
     // 포토폴리오의 모든 리스트를 가져오는 함수
     public List<PortfolioDto> getAllList( ){
+    	buildSessionFacotry();
         Session session = factory.openSession();
         Transaction tx = null;
         List<PortfolioDto> portfolioDtos = null;
@@ -79,6 +84,7 @@ public class DbOperations {
     
     //포토폴리오 테이블의 데이터를 전부 삭제
     public void deleteAllContent() {
+    	buildSessionFacotry();
         Session session = factory.openSession();
         Transaction tx = null;
      
