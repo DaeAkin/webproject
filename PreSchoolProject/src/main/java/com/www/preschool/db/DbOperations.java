@@ -104,6 +104,7 @@ public class DbOperations {
 
 		try {
 
+			System.out.println("------ getOnePortfolio -------");
 			tx = session.beginTransaction();
 
 			portfolioDto = session.get(PortfolioDto.class, title);

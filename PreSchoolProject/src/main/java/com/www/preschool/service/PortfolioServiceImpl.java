@@ -49,6 +49,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 		
 	}
 
+	@Override
+	public PortfolioDto getOnePortfolio(String title) {
+		// TODO Auto-generated method stub
+		return portfolioDao.getOnePortfolio(title);
+	}
+
 	
 
 }

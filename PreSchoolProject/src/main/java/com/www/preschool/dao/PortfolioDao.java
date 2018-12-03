@@ -10,5 +10,7 @@ public interface PortfolioDao {
 	List<PortfolioDto> getAllList();
 	
 	void deleteAllContent();
+	
+	PortfolioDto getOnePortfolio(String title);
 
 }

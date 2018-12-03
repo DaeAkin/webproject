@@ -38,4 +38,10 @@ public class PortfolioDaoImpl implements PortfolioDao{
 		dbOperation.deleteAllContent();
 	}
 
+	@Override
+	public PortfolioDto getOnePortfolio(String title) {
+		// TODO Auto-generated method stub
+		return dbOperation.getOnePortfolio(title);
+	}
+
 }

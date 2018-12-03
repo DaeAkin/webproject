@@ -2,16 +2,13 @@ package com.www.preschool.test;
 
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.support.NullValue;
 
 import com.www.preschool.dto.PortfolioDto;
 import com.www.preschool.service.PortfolioService;
@@ -36,13 +33,19 @@ public class PortflioServiceTest {
 	public void addAndGet() {
 		//데이터 전부삭제.
 		portfolioService.deleteAllContent();
-		
+		// dto 하나 넣기
 		portfolioService.insert(portfolio);
 
 		List<PortfolioDto> portfolioDtos = 
 				portfolioService.getAllList();
 	
 		assertThat(portfolioDtos.size(), is(1));
+		
+		PortfolioDto dto = 
+				portfolioService.getOnePortfolio(portfolio.getTitle());
+		
+		assertThat(dto.getTitle(), is(portfolio.getTitle()));
+		
 		
 		
 	}

@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 //모든 필드를 생성자에 넣어줌 
 @AllArgsConstructor
 @Table(name = "portfolio")
+
 public class PortfolioDto {
 	//기본키 , 기본키 생성을 DB에게 맡김 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

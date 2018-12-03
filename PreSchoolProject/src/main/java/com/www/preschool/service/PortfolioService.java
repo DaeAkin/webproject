@@ -19,4 +19,7 @@ public interface PortfolioService {
 	
 	void deleteAllContent();
 
+	PortfolioDto getOnePortfolio(String title);
+		
+	
 }
