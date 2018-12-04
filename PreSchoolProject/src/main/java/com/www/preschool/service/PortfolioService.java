@@ -11,7 +11,9 @@ public interface PortfolioService {
 	
 	void imageUpload(MultipartFile file);
 	
-	void select();
+    PortfolioDto select(int portfolio_number);
+	
+	void update(PortfolioDto portfolio);
 	
 	int insert(PortfolioDto portofolio);
 	

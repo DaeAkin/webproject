@@ -144,6 +144,47 @@ public class DbOperations {
 		}
 
 	}
+	
+	// 포트폴리오 수정
+			public void updatePortfolio(PortfolioDto portfolio) {
+				Session session = factory.openSession();
+				Transaction tx = null;
+				try {
+					tx = session.beginTransaction();
+					session.update(portfolio);
+					tx.commit();
+				}catch(HibernateException e) {
+					if(tx != null) {
+						tx.rollback();
+					}
+					e.printStackTrace();
+				}finally {
+					session.close();
+				}
+				
+			}
+				
+
+			//포트폴리오 번호로 해당 포트폴리오 1개 가져오는 함수
+			public PortfolioDto getOnePortfolio(int portfolio_number) {
+				Session session = factory.openSession();
+				Transaction tx = null;
+				PortfolioDto selectedPortfolio = null;
+
+				try {
+					tx = session.beginTransaction();
+					selectedPortfolio = session.get(PortfolioDto.class, portfolio_number);
+					tx.commit();
+				} catch (HibernateException e) {
+					if (tx != null)
+						tx.rollback();
+					e.printStackTrace();
+				} finally {
+					session.close();
+				}
+
+				return selectedPortfolio;
+			}
 
 	// public List<PortfolioDto> selectOne( ){
 	// Session session = factory.openSession();

@@ -21,11 +21,13 @@ public class PortflioServiceTest {
 	PortfolioService portfolioService = new PortfolioServiceImpl();
 	
 	PortfolioDto portfolio = null;
+	PortfolioDto portfolio2 = null;
 	
 	// 테스트 실행하기전에 넣어야할 작업관련 메소드
 	@Before
 	public void setUp() {
 		portfolio = new PortfolioDto(1, 2, "asd", "asd", "2018-02", "asd");
+		portfolio2 = new PortfolioDto();
 		DbOperations.setXmlLocation("hibernate.cfg2.xml");
 		
 	}
@@ -37,11 +39,17 @@ public class PortflioServiceTest {
 		portfolioService.deleteAllContent();
 		// dto 하나 넣기
 		portfolioService.insert(portfolio);
-
 		List<PortfolioDto> portfolioDtos = 
 				portfolioService.getAllList();
 	
 		assertThat(portfolioDtos.size(), is(1));
+		
+		/*jaehoon test
+		portfolio2 = portfolioService.select(portfolio.getNo());
+		portfolio2.setTitle("literacture");
+		portfolioService.update(portfolio2);
+		assertThat(portfolio2.getTitle(), is("literacture"));
+		*/
 		
 //		PortfolioDto dto = 
 //				portfolioService.getOnePortfolio(portfolio.getTitle());

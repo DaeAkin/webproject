@@ -26,9 +26,17 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 
 	@Override
-	public void select() {
+	public PortfolioDto select(int portfolio_number) {
 		// TODO Auto-generated method stub
-
+		System.out.println("select service");
+		return portfolioDao.getOnePortfolio(portfolio_number);
+	}
+	
+	@Override
+	public void update(PortfolioDto portfolio) {
+		// TODO Auto-generated method stub
+		System.out.println("update success");
+		portfolioDao.updatePortfolio(portfolio);;
 	}
 
 	@Override
