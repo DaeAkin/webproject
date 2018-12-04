@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 // getter, setter 자동생성
 @Data
-//파라미터가 없는 기본 생성자 생  \
+//파라미터가 없는 기본 생성자 생성
 @NoArgsConstructor
 //@NonNull이 붙은 필드만 생성자에 넣어줌 
 @RequiredArgsConstructor
