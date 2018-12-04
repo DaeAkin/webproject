@@ -12,5 +12,8 @@ public interface PortfolioDao {
 	void deleteAllContent();
 	
 	PortfolioDto getOnePortfolio(String title);
+	
+	void updatePortfolio(PortfolioDto portfolio);
+	PortfolioDto getOnePortfolio(int portfolio_number);
 
 }

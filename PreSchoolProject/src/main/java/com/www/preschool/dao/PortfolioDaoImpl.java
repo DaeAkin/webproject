@@ -44,4 +44,15 @@ public class PortfolioDaoImpl implements PortfolioDao{
 		return dbOperation.getOnePortfolio(title);
 	}
 
+	@Override
+	public void updatePortfolio(PortfolioDto portfolio) {
+		// TODO Auto-generated method stub
+		dbOperation.updatePortfolio(portfolio);
+	}
+
+	@Override
+	public PortfolioDto getOnePortfolio(int portfolio_number) {
+		// TODO Auto-generated method stub
+		return dbOperation.getOnePortfolio(portfolio_number);
+	}
 }
