@@ -21,15 +21,15 @@ public class DbOperations {
 
 	private static SessionFactory factory;
 
-	private String xmlLocation = "hibernate.cfg.xml";
+	private static String xmlLocation = "hibernate.cfg.xml";
 	
 	public DbOperations() {
 		buildSessionFacotry();
 	}
 	
 
-	public void setXmlLocation(String xmlLocation) {
-		this.xmlLocation = xmlLocation;
+	public static void setXmlLocation(String xmlLocation) {
+		DbOperations.xmlLocation = xmlLocation;
 	}
 	
 	 private SessionFactory buildSessionFacotry() {
