@@ -17,5 +17,9 @@ public interface PortfolioService {
 	
 	List<PortfolioDto> getAllList();
 	
+	void deleteAllContent();
 
+	PortfolioDto getOnePortfolio(String title);
+		
+	
 }

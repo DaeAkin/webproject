@@ -43,6 +43,18 @@ public class PortfolioServiceImpl implements PortfolioService {
 		return portfolioDao.getAllList();
 	}
 
+	@Override
+	public void deleteAllContent() {
+		portfolioDao.deleteAllContent();
+		
+	}
+
+	@Override
+	public PortfolioDto getOnePortfolio(String title) {
+		// TODO Auto-generated method stub
+		return portfolioDao.getOnePortfolio(title);
+	}
+
 	
 
 }
