@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
 @Entity
 // getter, setter 자동생성
 @Data
@@ -45,3 +46,4 @@ public class PortfolioDto {
 	@NonNull private String photos_url;
 	
 }
+
