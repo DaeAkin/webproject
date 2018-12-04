@@ -15,7 +15,7 @@ import com.www.preschool.dto.PortfolioDto;
 import com.www.preschool.service.PortfolioService;
 import com.www.preschool.service.PortfolioServiceImpl;
 
-public class PortflioServiceTest {
+public class PortfolioServiceTest {
 	
 	@Autowired
 	PortfolioService portfolioService = new PortfolioServiceImpl();
@@ -44,12 +44,12 @@ public class PortflioServiceTest {
 	
 		assertThat(portfolioDtos.size(), is(1));
 		
-		/*jaehoon test
+	
 		portfolio2 = portfolioService.select(portfolio.getNo());
 		portfolio2.setTitle("literacture");
 		portfolioService.update(portfolio2);
 		assertThat(portfolio2.getTitle(), is("literacture"));
-		*/
+		
 		
 //		PortfolioDto dto = 
 //				portfolioService.getOnePortfolio(portfolio.getTitle());
