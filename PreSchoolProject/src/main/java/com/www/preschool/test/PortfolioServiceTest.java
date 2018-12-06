@@ -10,11 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.www.preschool.db.DbOperations;
 import com.www.preschool.dto.PortfolioDto;
 import com.www.preschool.service.PortfolioService;
 import com.www.preschool.service.PortfolioServiceImpl;
-
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = "context-testContext.xml")
 public class PortfolioServiceTest {
 	
 	@Autowired
@@ -26,9 +26,9 @@ public class PortfolioServiceTest {
 	// 테스트 실행하기전에 넣어야할 작업관련 메소드
 	@Before
 	public void setUp() {
-		portfolio = new PortfolioDto(1, 2, "asd", "asd", "2018-02", "asd");
+		portfolio = new PortfolioDto(1, 2, "asd", "asd", "2018-03", "asd");
 		portfolio2 = new PortfolioDto();
-		DbOperations.setXmlLocation("hibernate.cfg2.xml");
+		
 		
 	}
 	
@@ -49,14 +49,6 @@ public class PortfolioServiceTest {
 		portfolio2.setTitle("literacture");
 		portfolioService.update(portfolio2);
 		assertThat(portfolio2.getTitle(), is("literacture"));
-		
-		
-//		PortfolioDto dto = 
-//				portfolioService.getOnePortfolio(portfolio.getTitle());
-//		
-//		assertThat(dto.getTitle(), is(portfolio.getTitle()));
-		
-		
 		
 	}
 

@@ -11,9 +11,7 @@ import com.www.preschool.dto.PortfolioDto;
 public class PortfolioDaoImpl implements PortfolioDao{
 	
 	
-	public void setXmlLocation(String xmlLocation) {
-		dbOperation.setXmlLocation(xmlLocation);
-	}
+
 	
 	DbOperations dbOperation = new DbOperations();
 	
