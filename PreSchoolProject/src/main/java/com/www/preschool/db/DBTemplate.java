@@ -10,16 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.www.preschool.dto.PortfolioDto;
 
 public class DBTemplate implements SessionCallback{
-	private static SessionFactory factory;
+	private SessionFactory factory;
 	
 	
-	public String xmlLocation = "hibernate.cfg.xml";
+	public static String xmlLocation = "hibernate.cfg.xml";
+	
+	public static void setXmlLocation(String xmlLocation) {
+		DBTemplate.xmlLocation = xmlLocation;
+	}
 	
 
-	
-	public DBTemplate() {
-		buildSessionFacotry();
-	}
 	
 	private SessionFactory buildSessionFacotry() {
     	
@@ -40,6 +40,7 @@ public class DBTemplate implements SessionCallback{
 	@Override
 	public <T> T execute(SessionStrategy<T> ssst) {
 		
+		buildSessionFacotry();
 		
 		Session session = factory.openSession();
 		Transaction tx = null;
