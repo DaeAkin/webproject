@@ -15,195 +15,81 @@ import org.hibernate.cfg.Configuration;
 
 import com.www.preschool.dto.PortfolioDto;
 
+import javassist.compiler.ast.NewExpr;
 import sun.net.www.content.text.plain;
 
 public class DbOperations {
 
-	private static SessionFactory factory;
-
-	private static String xmlLocation = "hibernate.cfg.xml";
-	
-	public DbOperations() {
-		buildSessionFacotry();
-	}
+	DBTemplate dbTemplate = new DBTemplate();
 	
 
-	public static void setXmlLocation(String xmlLocation) {
-		DbOperations.xmlLocation = xmlLocation;
-	}
 	
-	 private SessionFactory buildSessionFacotry() {
-	    	
-	       try {
-	            factory = new Configuration().
-	            		configure(xmlLocation).
-	            		addAnnotatedClass(PortfolioDto.class).
-	            		buildSessionFactory();
-	           
-	         } catch (Throwable ex) { 
-	            System.err.println("Failed to create sessionFactory object." + ex);
-	            throw new ExceptionInInitializerError(ex); 
-	         }
-	       return factory;
-		}
+	 /* 데이터베이스에 Portofolio 추가하는 메소드 */
+	 public Integer addPortofolio(final PortfolioDto portfolio) {
+		return dbTemplate.execute(new SessionStrategy<Integer>() {
+			@Override
+			public Integer doWithSession(Session session) {
+				// TODO Auto-generated method stub
+				
+				return (Integer) session.save(portfolio);
+			}
+		});
+	 }
 
-	
-
-	/* 데이터베이스에 Portofolio 추가하는 메소드 */
-	public Integer addPortofolio(PortfolioDto portfolio) {
-
-		Session session = factory.openSession();
-		Transaction tx = null;
-		Integer portofolioID = null;
-
-		try {
-			tx = session.beginTransaction();
-			portofolioID = (Integer) session.save(portfolio);
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return portofolioID;
-	}
 
 	// 포토폴리오의 모든 리스트를 가져오는 함수
-	public List<PortfolioDto> getAllList() {
+	 public List<PortfolioDto> getAllList() {
+		 return dbTemplate.execute(new SessionStrategy<List<PortfolioDto>>() {
+			@Override
+			public List<PortfolioDto> doWithSession(Session session) {
+				// TODO Auto-generated method stub
+				return session.createNativeQuery("select * from portfolio").list();
+			}
+			 
+		});
+	 }
 
-		Session session = factory.openSession();
-		Transaction tx = null;
-		List<PortfolioDto> portfolioDtos = null;
 
-		try {
-			System.out.println(" 포토폴리오 모든 리스트 ");
-			tx = session.beginTransaction();
+	public <T> void deleteAllContent() {
+		dbTemplate.execute(new SessionStrategy<T>() {
 
-			portfolioDtos = session.createNativeQuery("select * from portfolio").list();
-
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return portfolioDtos;
-	}
-
-	// title로 기준으로 한개가져오기. (test용도로 사용할 것임)
-	public PortfolioDto getOnePortfolio(String title) {
-
-		Session session = factory.openSession();
-		Transaction tx = null;
-		PortfolioDto portfolioDto = null;
-
-		try {
-
-			System.out.println("------ getOnePortfolio -------");
-			tx = session.beginTransaction();
-
-			portfolioDto = session.get(PortfolioDto.class, title);
-
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return portfolioDto;
-
-	}
-
-	// 포토폴리오 테이블의 데이터를 전부 삭제
-	public void deleteAllContent() {
-
-		Session session = factory.openSession();
-		Transaction tx = null;
-
-		try {
-			System.out.println(" 포토폴리오 모든 리스트 ");
-			tx = session.beginTransaction();
-
-			session.createNativeQuery("delete from portfolio").executeUpdate();
-
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-
+			@Override
+			public T doWithSession(Session session) {
+				// TODO Auto-generated method stub
+				session.createNativeQuery("delete from portfolio").executeUpdate();
+				return null;
+			}
+			
+		});
 	}
 	
-	// 포트폴리오 수정
-			public void updatePortfolio(PortfolioDto portfolio) {
-				Session session = factory.openSession();
-				Transaction tx = null;
-				try {
-					tx = session.beginTransaction();
-					session.update(portfolio);
-					tx.commit();
-				}catch(HibernateException e) {
-					if(tx != null) {
-						tx.rollback();
-					}
-					e.printStackTrace();
-				}finally {
-					session.close();
-				}
-				
+	public <T> void updatePortfolio(final PortfolioDto portfolio) {
+		dbTemplate.execute(new SessionStrategy<T>() {
+
+			@Override
+			public T doWithSession(Session session) {
+				// TODO Auto-generated method stub
+				session.update(portfolio);
+				return null;
 			}
+		});
+	}
+	
+
+	
+	public PortfolioDto getOnePortfolio(final int portfolio_number) {
+		return dbTemplate.execute(new SessionStrategy<PortfolioDto>() {
+
+			@Override
+			public PortfolioDto doWithSession(Session session) {
+				// TODO Auto-generated method stub
+				return session.get(PortfolioDto.class, portfolio_number);
+			}
+			
+		});
+	}
 				
 
-			//포트폴리오 번호로 해당 포트폴리오 1개 가져오는 함수
-			public PortfolioDto getOnePortfolio(int portfolio_number) {
-				Session session = factory.openSession();
-				Transaction tx = null;
-				PortfolioDto selectedPortfolio = null;
 
-				try {
-					tx = session.beginTransaction();
-					selectedPortfolio = session.get(PortfolioDto.class, portfolio_number);
-					tx.commit();
-				} catch (HibernateException e) {
-					if (tx != null)
-						tx.rollback();
-					e.printStackTrace();
-				} finally {
-					session.close();
-				}
-
-				return selectedPortfolio;
-			}
-
-	// public List<PortfolioDto> selectOne( ){
-	// Session session = factory.openSession();
-	// Transaction tx = null;
-	// PortfolioDto portfolioDto = null;
-	//
-	// try {
-	// tx = session.beginTransaction();
-	// portfolioDto = session.
-	//
-	// tx.commit();
-	// } catch (HibernateException e) {
-	// if (tx!=null) tx.rollback();
-	// e.printStackTrace();
-	// } finally {
-	// session.close();
-	// }
-	//
-	// return portfolioDtos;
-	// }
 
 }
