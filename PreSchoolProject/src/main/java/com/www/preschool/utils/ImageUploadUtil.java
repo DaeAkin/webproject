@@ -31,57 +31,6 @@ public class ImageUploadUtil {
 	private static final String filePath = "/Users/donghyeonmin/upload";
 	private static final String imageMemberPath = "/Users/donghyeonmin/upload";
 
-	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request)
-			throws Exception {
-
-		HttpSession session = request.getSession();
-
-		// String root_path = session.getServletContext().getRealPath("/");
-
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-
-		MultipartFile multipartFile = null;
-		String originalFileName = null;
-		String originalFileExtension = null;
-		String storedFileName = null;
-
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		Map<String, Object> listMap = null;
-
-		String boardIDX = String.valueOf(map.get("id"));
-
-		File file = new File(filePath); // root_path + filePath
-		if (file.exists() == false) {
-			file.mkdirs();
-		}
-
-		// 파일이 존재한다면.
-		while (iterator.hasNext()) {
-			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-			if (multipartFile.isEmpty() == false) {
-				originalFileName = multipartFile.getOriginalFilename();
-				// 확장자 알기.
-				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-				storedFileName = CommonUtils.getRandomString() + "_s" + originalFileName;
-
-				file = new File(filePath + storedFileName); // root_path + filePath + storedFileName
-				multipartFile.transferTo(file);
-
-				listMap = new HashMap<String, Object>();
-				listMap.put("BOARD_IDX", boardIDX);
-				listMap.put("ORIGINAL_FILE_NAME", originalFileName);
-				listMap.put("STORED_FILE_NAME", storedFileName);
-				listMap.put("FILE_SIZE", multipartFile.getSize());
-				listMap.put("NICKNAME", session.getAttribute("nickname"));
-				list.add(listMap);
-				System.out.println("파일 저장위치 :" + filePath);
-			}
-		}
-
-		return list;
-	}
-
 	public void parseInsertFileInfoAjax(HttpServletRequest request) throws Exception {
 
 		HttpSession session = request.getSession();
@@ -215,7 +164,7 @@ public class ImageUploadUtil {
 
 	}
 
-	/* 다른 방법의 파일 업로드 */
+	// Main ImageUpload Method
 	public Map<String, Object> uploadFile(String uploadPath, String originalName, byte[] fileData)
 			throws Exception {
 		// 2개의 객체를 리턴하기 위해 MAP을 사용
@@ -241,6 +190,7 @@ public class ImageUploadUtil {
 		int imageWidth = image.getWidth(null);
 
 		System.out.println("이미지의 가로크기 : " + imageWidth);
+		
 		/*
 		 * 가로가 1200 이상이면 줄이기 .
 		 * 
@@ -413,4 +363,58 @@ public class ImageUploadUtil {
 		System.out.println("calWidth의 imgWidth 값  :" + imgWidth);
 		return ratio;
 	}
+	
+	
+
+	// deprecated
+//	public List<Map<String, Object>> parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request)
+//			throws Exception {
+//
+//		HttpSession session = request.getSession();
+//
+//		// String root_path = session.getServletContext().getRealPath("/");
+//
+//		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+//		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+//
+//		MultipartFile multipartFile = null;
+//		String originalFileName = null;
+//		String originalFileExtension = null;
+//		String storedFileName = null;
+//
+//		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+//		Map<String, Object> listMap = null;
+//
+//		String boardIDX = String.valueOf(map.get("id"));
+//
+//		File file = new File(filePath); // root_path + filePath
+//		if (file.exists() == false) {
+//			file.mkdirs();
+//		}
+//
+//		// 파일이 존재한다면.
+//		while (iterator.hasNext()) {
+//			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+//			if (multipartFile.isEmpty() == false) {
+//				originalFileName = multipartFile.getOriginalFilename();
+//				// 확장자 알기.
+//				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+//				storedFileName = CommonUtils.getRandomString() + "_s" + originalFileName;
+//
+//				file = new File(filePath + storedFileName); // root_path + filePath + storedFileName
+//				multipartFile.transferTo(file);
+//
+//				listMap = new HashMap<String, Object>();
+//				listMap.put("BOARD_IDX", boardIDX);
+//				listMap.put("ORIGINAL_FILE_NAME", originalFileName);
+//				listMap.put("STORED_FILE_NAME", storedFileName);
+//				listMap.put("FILE_SIZE", multipartFile.getSize());
+//				listMap.put("NICKNAME", session.getAttribute("nickname"));
+//				list.add(listMap);
+//				System.out.println("파일 저장위치 :" + filePath);
+//			}
+//		}
+//
+//		return list;
+//	}
 }
