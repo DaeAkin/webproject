@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import com.www.preschool.dto.MemberDto;
 import com.www.preschool.dto.PortfolioDto;
 
 import javassist.compiler.ast.NewExpr;
@@ -89,7 +90,22 @@ public class DbOperations {
 		});
 	}
 				
+	public MemberDto login(MemberDto member) {
+		return dbTemplate.execute(new SessionStrategy<MemberDto>() {
 
+			@Override
+			public MemberDto doWithSession(Session session) {
+				// TODO Auto-generated method stub
+				//
+				String hpl = "from MEMBER m where m.MEMBER_ID = ? AND m.MEMBER.ID = ?";
+				
+				return new MemberDto("admin","admin");
+				
+				//return session.get(PortfolioDto.class, member_id, member_pwd);
+			}
+			
+		});
+	}
 
 
 }
