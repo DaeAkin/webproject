@@ -35,7 +35,8 @@ public class DBTemplate implements SessionCallback{
 	         }
 	       return factory;
 		}
-	
+
+
 
 	@Override
 	public <T> T execute(SessionStrategy<T> ssst) {

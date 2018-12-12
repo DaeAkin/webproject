@@ -2,9 +2,13 @@ package com.www.preschool.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.www.preschool.db.DBExecute;
+import com.www.preschool.db.DBTemplate;
 import com.www.preschool.db.DbOperations;
+import com.www.preschool.db.SessionStrategy;
 import com.www.preschool.dto.PortfolioDto;
 
 @Repository("portofolioDao")
@@ -13,44 +17,45 @@ public class PortfolioDaoImpl implements PortfolioDao{
 	
 
 	
-	DbOperations dbOperation = new DbOperations();
 	
+	
+	DBTemplate dbTemplate = new DBTemplate();
+	DBExecute dbExecute = new DBExecute();
 	
 	
 	@Override
-	public int addPortofolio(PortfolioDto portofolio) {
-		// TODO Auto-generated method stub
-		
-		return dbOperation.addPortofolio(portofolio);
+	public int addPortofolio(final PortfolioDto portofolio) {
+		return dbExecute.addExecute(portofolio);
 	}
 
+	//리펙토링 안함.
 	@Override
 	public List<PortfolioDto> getAllList() {
 		// TODO Auto-generated method stub
-		return dbOperation.getAllList();
+		 return dbTemplate.execute(new SessionStrategy<List<PortfolioDto>>() {
+			@Override
+			public List<PortfolioDto> doWithSession(Session session) {
+				// TODO Auto-generated method stub
+				return session.createNativeQuery("select * from portfolio").list();
+			}
+			 
+		});
 	}
 
 	@Override
-	public void deleteAllContent() {
-		
-		dbOperation.deleteAllContent();
+	public <T> void deleteAllContent() {
+		dbExecute.deleteAllContent("delete from portfolio");
 	}
 
+
 	@Override
-	public PortfolioDto getOnePortfolio(String title) {
+	public <T> void updatePortfolio(final PortfolioDto portfolio) {
 		// TODO Auto-generated method stub
-		return dbOperation.getOnePortfolio(title);
+		dbExecute.update(portfolio);
 	}
 
 	@Override
-	public void updatePortfolio(PortfolioDto portfolio) {
-		// TODO Auto-generated method stub
-		dbOperation.updatePortfolio(portfolio);
-	}
-
-	@Override
-	public PortfolioDto getOnePortfolio(int portfolio_number) {
-		// TODO Auto-generated method stub
-		return dbOperation.getOnePortfolio(portfolio_number);
+	public PortfolioDto getOnePortfolio(final int portfolio_number) {
+		return dbExecute.getOne(portfolio_number , PortfolioDto.class);
 	}
 }

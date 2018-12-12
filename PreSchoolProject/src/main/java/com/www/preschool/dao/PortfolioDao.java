@@ -9,11 +9,11 @@ public interface PortfolioDao {
 	
 	List<PortfolioDto> getAllList();
 	
-	void deleteAllContent();
+	<T> void deleteAllContent();
 	
-	PortfolioDto getOnePortfolio(String title);
 	
-	void updatePortfolio(PortfolioDto portfolio);
+	
+	<T> void updatePortfolio(PortfolioDto portfolio);
 	PortfolioDto getOnePortfolio(int portfolio_number);
 
 }
