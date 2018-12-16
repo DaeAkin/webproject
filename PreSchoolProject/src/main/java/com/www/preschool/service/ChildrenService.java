@@ -16,6 +16,6 @@ public interface ChildrenService {
 		
 		void deleteAllContent();
 
-		ChildrenDto getOnePortfolio(String title);
+		ChildrenDto getOneChild(int child_number);
 
 }

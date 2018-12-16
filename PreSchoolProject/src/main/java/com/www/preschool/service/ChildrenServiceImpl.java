@@ -46,9 +46,9 @@ public class ChildrenServiceImpl implements ChildrenService {
 	}
 
 	@Override
-	public ChildrenDto getOnePortfolio(String title) {
+	public ChildrenDto getOneChild(int child_number) {
 		// TODO Auto-generated method stub
-		return null;
+		return childrenDao.getOneChild(child_number);
 	}
 	
 	

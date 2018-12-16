@@ -36,7 +36,7 @@ public class ChildrenDto {
 	@Column(name="age")
 	@NonNull private Integer age;
 	@Column(name="gender")
-	@NonNull private Integer gender;
+	@NonNull private boolean gender;
 	@Column(name="parentPhone")
 	@NonNull private String parentPhone;
 	@Column(name="photo_url")
