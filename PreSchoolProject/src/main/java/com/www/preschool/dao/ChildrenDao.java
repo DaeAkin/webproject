@@ -12,7 +12,10 @@ public interface ChildrenDao{
 	<T> void deleteAllContent();
 	
 	<T> void update(ChildrenDto child);
+	
 	ChildrenDto getOneChild(int child_number);
+	
+	List<ChildrenDto> getchildrenWithTeacherNo(String teacher_no);
 
 	
 

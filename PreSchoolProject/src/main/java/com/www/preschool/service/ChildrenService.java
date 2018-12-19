@@ -17,5 +17,7 @@ public interface ChildrenService {
 		void deleteAllContent();
 
 		ChildrenDto getOneChild(int child_number);
+		
+		List<ChildrenDto> getchildrenWithTeacherNo(String teacher_no);
 
 }

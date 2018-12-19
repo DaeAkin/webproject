@@ -35,7 +35,7 @@ public class ChildrenServiceImpl implements ChildrenService {
 	@Override
 	public List<ChildrenDto> getAllList() {
 		// TODO Auto-generated method stub
-		return null;
+		return childrenDao.getAllList();
 	}
 
 	@Override
@@ -49,6 +49,12 @@ public class ChildrenServiceImpl implements ChildrenService {
 	public ChildrenDto getOneChild(int child_number) {
 		// TODO Auto-generated method stub
 		return childrenDao.getOneChild(child_number);
+	}
+
+	@Override
+	public List<ChildrenDto> getchildrenWithTeacherNo(String teacher_no) {
+		// TODO Auto-generated method stub
+		return childrenDao.getchildrenWithTeacherNo(teacher_no);
 	}
 	
 	

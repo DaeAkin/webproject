@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Entity
 // getter, setter 자동생성
@@ -41,5 +42,7 @@ public class ChildrenDto {
 	@NonNull private String parentPhone;
 	@Column(name="photo_url")
 	@NonNull private String photo_url;
+	
+	
 	
 }

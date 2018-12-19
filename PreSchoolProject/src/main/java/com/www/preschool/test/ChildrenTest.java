@@ -1,5 +1,7 @@
 package com.www.preschool.test;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +38,19 @@ public class ChildrenTest {
 		//데이터 1개 주입
 		childrenService.insert(child);
 		
+		List<ChildrenDto> result = 
+				childrenService.getAllList();
+		
+		for (ChildrenDto childrenDto : result) {
+			System.out.println(childrenDto.toString());
+		}
+		
+		List<ChildrenDto> result2 = 
+				childrenService.getchildrenWithTeacherNo(String.valueOf(child.getTeacher_no()));
+		
+		for (ChildrenDto childrenDto : result2) {
+			System.out.println(childrenDto.toString());
+		}
 		
 		
 		

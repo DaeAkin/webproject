@@ -11,10 +11,14 @@
               			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 	
 
-<bean id="DBTemplate" class="com.www.preschool.db.DBTemplate">
-<constructor-arg name="xmlLocation" value="hibernate.cfg2.xml"/>
 	
-</bean>
+	
+	<bean id="childrenDao" class="com.www.preschool.dao.ChildrenDaoImpl"/>
+	
+	<bean id="childrenService" class="com.www.preschool.service.ChildrenServiceImpl"/>
+	
+	
+	
 
 
 </beans>
