@@ -97,6 +97,10 @@
 		
 	</insert>
 	
+	<delete id="deleteAllPortfolio">
+		delete from portfolio
+	</delete>
+	
 
 
 	
