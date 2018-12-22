@@ -2,7 +2,9 @@ package com.www.preschool.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.www.preschool.db.DBExecute;
@@ -17,7 +19,8 @@ public class PortfolioDaoImpl implements PortfolioDao{
 	
 
 	
-	
+	@Autowired
+	SqlSession sqlSession;
 	
 	DBTemplate dbTemplate = new DBTemplate();
 	DBExecute dbExecute = new DBExecute();
@@ -44,7 +47,7 @@ public class PortfolioDaoImpl implements PortfolioDao{
 
 	@Override
 	public <T> void deleteAllContent() {
-		dbExecute.deleteAllContent("delete from portfolio");
+		sqlSession.delete("deleteAllPortfolio");
 	}
 
 
