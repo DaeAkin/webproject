@@ -8,14 +8,17 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.www.preschool.db.DBTemplate;
 import com.www.preschool.dto.PortfolioDto;
 import com.www.preschool.service.PortfolioService;
 import com.www.preschool.service.PortfolioServiceImpl;
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = "context-testContext.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "context-testContext.xml")
 public class PortfolioServiceTest {
 	
 
@@ -48,14 +51,24 @@ public class PortfolioServiceTest {
 		assertThat(portfolioDtos.size(), is(1));
 		
 	
-		portfolio2 = portfolioService.select(portfolio.getNo());
-		portfolio2.setTitle("literacture");
-		portfolioService.update(portfolio2);
-		assertThat(portfolio2.getTitle(), is("literacture"));
+//		portfolio2 = portfolioService.select(portfolio.getNo());
+//		portfolio2.setTitle("literacture");
+//		portfolioService.update(portfolio2);
+//		assertThat(portfolio2.getTitle(), is("literacture"));
 		
 	}
 	
-	
+	@Test
+	public void viewPortfolio() {
+		List<PortfolioDto> list = 
+				portfolioService.getOnePortfolioWtihChildren_no(
+				portfolio.getChild_no());
+		
+		assertThat(list.size(), is(1));
+		
+		System.out.println(list.toString());
+		
+	}
 	
 
 }

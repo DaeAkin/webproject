@@ -7,9 +7,16 @@
 	
 
 	
-	<bean id="childrenDao" class="com.www.preschool.dao.ChildrenDaoImpl">
+	<bean id="childrenDao" class="com.www.preschool.dao.ChildrenDaoImpl"/>
 	
-	</bean>
+	<bean id="childrenService" class="com.www.preschool.service.ChildrenServiceImpl"/>
+	
+	<bean id="portfolioService" class="com.www.preschool.service.PortfolioServiceImpl"/>
+	
+	<bean id="portfolioDao" class="com.www.preschool.dao.PortfolioDaoImpl"/>
+	<bean id="imageUploadUtil" class="com.www.preschool.utils.ImageUploadUtil"/>
+
+
 	
 
 

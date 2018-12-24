@@ -1,6 +1,7 @@
 package com.www.preschool.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.www.preschool.dto.PortfolioDto;
 import com.www.preschool.service.PortfolioService;
 
 @RestController
@@ -61,6 +63,23 @@ public class PortfolioController {
 		
 		
 		return null;
+	}
+	
+	@RequestMapping("/portfolio/view")
+	public Map<String, Object> viewPortfolio(@RequestBody Map<String, Object> paramMap,
+			HttpServletRequest request,HttpServletResponse response) {
+		//조회할 학생의 no 가져오기
+		int child_no = Integer.parseInt((String)paramMap.get("child_no"));
+		
+		System.out.println("child_no : " + child_no);
+		List<PortfolioDto> list = 
+		portfolioService.getOnePortfolioWtihChildren_no(child_no);
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultMap.put("portfolio", list);
+		
+		return resultMap;
 	}
 	
 //	@RequestMapping("/portfolio/add")

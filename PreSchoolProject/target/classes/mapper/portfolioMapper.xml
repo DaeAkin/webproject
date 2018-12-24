@@ -101,6 +101,16 @@
 		delete from portfolio
 	</delete>
 	
+	<select id="getOnePortfolioWtihChildren_no" parameterType="int"
+	resultType="com.www.preschool.dto.PortfolioDto">
+		select 
+			*
+		from
+			portfolio
+		where 
+			child_no = #{child_no}
+	</select> 
+	
 
 
 	

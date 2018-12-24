@@ -15,5 +15,7 @@ public interface PortfolioDao {
 	
 	<T> void updatePortfolio(PortfolioDto portfolio);
 	PortfolioDto getOnePortfolio(int portfolio_number);
-
+	
+	
+	List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no);
 }

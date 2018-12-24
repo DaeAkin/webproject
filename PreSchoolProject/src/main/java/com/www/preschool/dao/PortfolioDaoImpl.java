@@ -61,4 +61,10 @@ public class PortfolioDaoImpl implements PortfolioDao{
 	public PortfolioDto getOnePortfolio(final int portfolio_number) {
 		return dbExecute.getOne(portfolio_number , PortfolioDto.class);
 	}
+
+	@Override
+	public List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("getOnePortfolioWtihChildren_no",children_no);
+	}
 }

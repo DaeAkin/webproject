@@ -22,6 +22,8 @@ public interface PortfolioService {
 	void deleteAllContent();
 
 	PortfolioDto getOnePortfolio(String title);
+	
+	List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no);
 		
 	
 }
