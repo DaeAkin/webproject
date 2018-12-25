@@ -1,6 +1,11 @@
 package com.www.preschool.dao;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.hibernate.Session;
@@ -9,22 +14,24 @@ import org.springframework.stereotype.Repository;
 
 import com.www.preschool.db.DBExecute;
 import com.www.preschool.db.DBTemplate;
-import com.www.preschool.db.DbOperations;
 import com.www.preschool.db.SessionStrategy;
 import com.www.preschool.dto.PortfolioDto;
 
-@Repository("portofolioDao")
+@Repository("portfolioDao")
 public class PortfolioDaoImpl implements PortfolioDao{
 	
 	
 
 	
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	DBTemplate dbTemplate = new DBTemplate();
 	DBExecute dbExecute = new DBExecute();
 	
+	public PortfolioDaoImpl() {
+//		assertThat(sqlSession, notNullValue());
+	}
 	
 	@Override
 	public int addPortofolio(final PortfolioDto portofolio) {
@@ -47,14 +54,16 @@ public class PortfolioDaoImpl implements PortfolioDao{
 
 	@Override
 	public <T> void deleteAllContent() {
+		
+		System.out.println("deleteAllContent sqlSession : " + sqlSession);
 		sqlSession.delete("deleteAllPortfolio");
 	}
 
 
 	@Override
-	public <T> void updatePortfolio(final PortfolioDto portfolio) {
+	public int updatePortfolio(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
-		dbExecute.update(portfolio);
+		return sqlSession.update("updatePortfolio",paramMap);
 	}
 
 	@Override
@@ -65,6 +74,7 @@ public class PortfolioDaoImpl implements PortfolioDao{
 	@Override
 	public List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no) {
 		// TODO Auto-generated method stub
+		System.out.println("sqlSession null ? : " + sqlSession);
 		return sqlSession.selectList("getOnePortfolioWtihChildren_no",children_no);
 	}
 }

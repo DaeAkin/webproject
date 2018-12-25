@@ -1,6 +1,7 @@
 package com.www.preschool.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +13,15 @@ import com.www.preschool.dao.PortfolioDaoImpl;
 import com.www.preschool.dto.PortfolioDto;
 import com.www.preschool.utils.ImageUploadUtil;
 
-@Service
+@Service("portfolioService")
 public class PortfolioServiceImpl implements PortfolioService {
 
 	@Autowired
 	ImageUploadUtil imageUploadUtil;
 	
-	@Autowired
-	SqlSession sqlSession;
 	
 	@Autowired
-	PortfolioDao portfolioDao = new PortfolioDaoImpl();
+	PortfolioDao portfolioDao;
 	
 	@Override
 	public void imageUpload(MultipartFile file) {
@@ -37,10 +36,10 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 	
 	@Override
-	public void update(PortfolioDto portfolio) {
+	public int update(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
 		System.out.println("update success");
-		portfolioDao.updatePortfolio(portfolio);;
+		return portfolioDao.updatePortfolio(paramMap);
 	}
 
 	@Override
@@ -70,6 +69,8 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no) {
 		// TODO Auto-generated method stub
+		System.out.println("portfolioDao : " + portfolioDao);
+		System.out.println("ImageUtils " + imageUploadUtil);
 		return portfolioDao.getOnePortfolioWtihChildren_no(children_no);
 	}
 

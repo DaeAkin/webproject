@@ -1,6 +1,7 @@
 package com.www.preschool.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.www.preschool.dto.PortfolioDto;
 
@@ -13,7 +14,8 @@ public interface PortfolioDao {
 	
 	
 	
-	<T> void updatePortfolio(PortfolioDto portfolio);
+	int updatePortfolio(Map<String, Object> paramMap);
+	
 	PortfolioDto getOnePortfolio(int portfolio_number);
 	
 	

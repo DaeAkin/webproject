@@ -111,6 +111,10 @@
 			child_no = #{child_no}
 	</select> 
 	
+	<update id="updatePortfolio" parameterMap="java.util.HashMap">
+	
+	</update>
+	
 
 
 	

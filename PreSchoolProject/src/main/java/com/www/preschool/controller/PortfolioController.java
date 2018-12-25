@@ -19,6 +19,7 @@ import com.www.preschool.service.PortfolioService;
 public class PortfolioController {
 	
 	final static String ADD_ERROR = "300001";
+	final static String UPDATE_FAIL = "300002";	
 	
 	@Autowired
 	PortfolioService portfolioService;
@@ -39,6 +40,8 @@ public class PortfolioController {
 		
 		System.out.println(paramMap.toString());
 		
+		
+		
 		Map<String,Object> resultMap = new HashMap<>();
 		
 		resultMap.put("code", ADD_ERROR);
@@ -51,14 +54,20 @@ public class PortfolioController {
 	@RequestMapping("/portfolio/update")
 	public Map<String, Object> updatePortfolio(@RequestBody Map<String, Object> paramMap,
 			HttpServletRequest request,HttpServletResponse response) {
+			
 			Map<String, Object> resultMap = new HashMap<>();
-				return paramMap;
+			
+			
+		return resultMap;
 		
 	}
 	
 	@RequestMapping("/portfolio/delete")
 	public Map<String, Object> deletePortfolio(@RequestBody Map<String, Object> paramMap,
 			HttpServletRequest request,HttpServletResponse response) {
+		
+		int result = portfolioService.update(paramMap);
+		
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		
@@ -72,6 +81,8 @@ public class PortfolioController {
 		int child_no = Integer.parseInt((String)paramMap.get("child_no"));
 		
 		System.out.println("child_no : " + child_no);
+		
+		System.out.println("portfolioService : " + portfolioService);
 		List<PortfolioDto> list = 
 		portfolioService.getOnePortfolioWtihChildren_no(child_no);
 		

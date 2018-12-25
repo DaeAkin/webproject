@@ -62,7 +62,7 @@ public class PortfolioServiceTest {
 	public void viewPortfolio() {
 		List<PortfolioDto> list = 
 				portfolioService.getOnePortfolioWtihChildren_no(
-				portfolio.getChild_no());
+						portfolio.getChild_no());
 		
 		assertThat(list.size(), is(1));
 		
