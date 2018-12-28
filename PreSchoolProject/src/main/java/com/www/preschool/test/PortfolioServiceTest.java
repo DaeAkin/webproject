@@ -60,9 +60,13 @@ public class PortfolioServiceTest {
 		// 방금 DB에 넣은 데이터 가져오기 
 		PortfolioDto insertedPortfolio = 
 				portfolioService.select(inserted_Portfoli_No);
-		
 		// title이 일치하는지 확인 
 		assertThat(insertedPortfolio.getTitle(), is(portfolio.getTitle()));
+	}
+	
+	// insert 작업시 오류일때 오류코드가 정상적으로 반환되는지 테스트
+	@Test
+	public void addWithError() {
 		
 	}
 	
@@ -121,5 +125,42 @@ public class PortfolioServiceTest {
 		
 	}
 	
+	@Test
+	// 삭제 테스트 
+	public void deleteTest() {
+		
+		// 데이터 전부삭제
+		portfolioService.deleteAllContent();
+
+		// dto 하나 넣기
+		int inserted_Portfoli_No = portfolioService.insert(DtoToHashMap.folioDtoToHashMap(portfolio));
+
+		List<PortfolioDto> portfolioDtos = portfolioService.getAllList();
+		// DB의 전체 갯수가 1개인지 확인
+		assertThat(portfolioDtos.size(), is(1));
+
+		// 방금 DB에 넣은 데이터 가져오기
+		PortfolioDto insertedPortfolio = portfolioService.select(inserted_Portfoli_No);
+
+		// title이 일치하는지 확인
+		assertThat(insertedPortfolio.getTitle(), is(portfolio.getTitle()));
+		
+		Map<String, Object> deleteMap = new HashMap<>();
+		deleteMap.put("no", inserted_Portfoli_No);
+		
+		System.out.println("inserted_Portfoli_No : " + inserted_Portfoli_No);
+		//삭제하기 
+		portfolioService.delete(deleteMap);
+		
+		portfolioDtos = portfolioService.getAllList();
+		
+		System.out.println("삭제 된 후 사이즈 : " + portfolioDtos.size());
+		
+		assertThat(portfolioDtos.size(), is(0));
+		
+
+	}
+	
+
 
 }

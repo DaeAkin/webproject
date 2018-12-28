@@ -83,6 +83,7 @@ public class PortfolioDaoImpl implements PortfolioDao{
 	@Override
 	public int delete(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("---- delete DAO ----");
+		return sqlSession.delete("delete",paramMap);
 	}
 }

@@ -80,7 +80,9 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public int delete(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("---- deleteService ----");
+		System.out.println(paramMap.get("no"));
+		return portfolioDao.delete(paramMap);
 	}
 
 	

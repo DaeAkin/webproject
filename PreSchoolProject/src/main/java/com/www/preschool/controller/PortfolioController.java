@@ -70,7 +70,7 @@ public class PortfolioController {
 	public Map<String, Object> deletePortfolio(@RequestBody Map<String, Object> paramMap,
 			HttpServletRequest request,HttpServletResponse response) {
 		
-		int result = portfolioService.update(paramMap);
+		int result = portfolioService.delete(paramMap);
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		
