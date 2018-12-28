@@ -30,12 +30,13 @@ public class PortfolioDaoImpl implements PortfolioDao{
 	DBExecute dbExecute = new DBExecute();
 	
 	public PortfolioDaoImpl() {
-//		assertThat(sqlSession, notNullValue());
+		
 	}
 	
 	@Override
-	public int addPortofolio(final PortfolioDto portofolio) {
-		return dbExecute.addExecute(portofolio);
+	public int addPortofolio(Map<String, Object> paramMap) {
+		System.out.println("addPortfolio ParamMap : " + paramMap.toString());
+		return sqlSession.insert("addPortofolio",paramMap);
 	}
 
 	//리펙토링 안함.
@@ -53,8 +54,9 @@ public class PortfolioDaoImpl implements PortfolioDao{
 	}
 
 	@Override
-	public <T> void deleteAllContent() {
-		
+	public void deleteAllContent() {
+		System.out.println("---- deleteAllContent ----");
+		System.out.println("check sqlSession null :"+  sqlSession);
 		System.out.println("deleteAllContent sqlSession : " + sqlSession);
 		sqlSession.delete("deleteAllPortfolio");
 	}
@@ -76,5 +78,11 @@ public class PortfolioDaoImpl implements PortfolioDao{
 		// TODO Auto-generated method stub
 		System.out.println("sqlSession null ? : " + sqlSession);
 		return sqlSession.selectList("getOnePortfolioWtihChildren_no",children_no);
+	}
+
+	@Override
+	public int delete(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

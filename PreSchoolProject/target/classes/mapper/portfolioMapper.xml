@@ -4,24 +4,30 @@
 
 	
 	
-	<insert id="insertContent" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="id">
-		insert into freeboard (
-			id, <!-- 서버구동시 삭제 id부분 -->
+	<insert id="addPortofolio" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="no">
+		insert into portfolio (
+			teacher_no,
+			child_no,
 			title,
-			writer,
-			content
+			comment,
+			every_day,
+			photos_url
 		
 		)values (
-		#{id},
+		#{teacher_no},
+		#{child_no},
 		#{title},
-		#{writer},
-		#{smarteditor}
+		#{comment},
+		#{every_day},
+		#{photos_url}
 		
 		) on duplicate key update 
-		id = #{id},
+		teacher_no = #{teacher_no},
+		child_no = #{child_no},
 		title = #{title},
-		writer = #{writer},
-		content = #{smarteditor}
+		comment = #{comment},
+		every_day = #{every_day},
+		photos_url = #{photos_url}
 	
 	</insert>
 	
@@ -111,9 +117,20 @@
 			child_no = #{child_no}
 	</select> 
 	
-	<update id="updatePortfolio" parameterMap="java.util.HashMap">
-	
+	<update id="updatePortfolio" parameterType="java.util.HashMap">
+		update
+			portfolio
+		set
+			title=#{title},
+			comment=#{comment},
+			every_day=#{every_day},
+			photos_url=#{photos_url}
+		where
+			no = #{no}
+			
 	</update>
+	
+
 	
 
 

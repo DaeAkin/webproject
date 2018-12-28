@@ -16,8 +16,9 @@ public interface PortfolioService {
 	
 	int update(Map<String, Object> paramMap);
 	
-	int insert(PortfolioDto portofolio);
+	int insert(Map<String, Object> paramMap);
 	
+	int delete(Map<String, Object> paramMap);
 	List<PortfolioDto> getAllList();
 	
 	void deleteAllContent();

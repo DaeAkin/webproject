@@ -40,12 +40,16 @@ public class PortfolioController {
 		
 		System.out.println(paramMap.toString());
 		
+		int result = portfolioService.insert(paramMap);
 		
+		
+	
 		
 		Map<String,Object> resultMap = new HashMap<>();
-		
+		if(result < 1) {
 		resultMap.put("code", ADD_ERROR);
 		resultMap.put("message", "등록에 실패했습니다.");
+		}
 		
 		
 		return resultMap;

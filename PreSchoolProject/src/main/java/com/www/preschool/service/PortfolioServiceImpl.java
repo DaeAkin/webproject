@@ -43,9 +43,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 
 	@Override
-	public int insert(PortfolioDto portofolio) {
+	public int insert(Map<String, Object> paramMap) {
 		System.out.println("insert service ");
-		return portfolioDao.addPortofolio(portofolio);
+		
+		portfolioDao.addPortofolio(paramMap);
+		
+		return ((Long)paramMap.get("no")).intValue();
 	}
 
 	@Override
@@ -72,6 +75,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 		System.out.println("portfolioDao : " + portfolioDao);
 		System.out.println("ImageUtils " + imageUploadUtil);
 		return portfolioDao.getOnePortfolioWtihChildren_no(children_no);
+	}
+
+	@Override
+	public int delete(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	
