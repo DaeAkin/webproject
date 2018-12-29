@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
+@Entity
 //getter, setter 자동생성
 @Data
 //파라미터가 없는 기본 생성자 생
@@ -31,7 +31,7 @@ public class MemberDto {
 //	@Id
 //	@GeneratedValue(strategy=GenerationType.IDENTITY)
 //	@Column(name="MEMBER_ID")
-	private String member_Id;
+	private String member_id;
 	
 	private String member_pwd;
 	

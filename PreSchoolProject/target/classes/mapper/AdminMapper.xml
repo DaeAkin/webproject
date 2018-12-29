@@ -4,6 +4,6 @@
 	
 	<select id="selectMember" resultType="com.www.preschool.dto.MemberDto" parameterType="com.www.preschool.dto.MemberDto">
 		SELECT * FROM MEMBER
-		WHERE MEMBER_ID = 'admin'
+		WHERE MEMBER_ID = #{member_id} AND MEMBER_PWD = #{member_pwd}
 	</select>
 </mapper>

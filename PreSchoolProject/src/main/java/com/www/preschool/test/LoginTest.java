@@ -31,10 +31,10 @@ public class LoginTest {
 	@Test
 	public void test2() {
 		MemberDto member = new MemberDto();
-		member.setMember_Id("admin");
+		member.setMember_id("admin");
 		member.setMember_pwd("admin");
 		
 		
-		System.out.println(loginService.login(member).getMember_Id());
+		System.out.println(loginService.login(member).getMember_id());
 	}
 }
