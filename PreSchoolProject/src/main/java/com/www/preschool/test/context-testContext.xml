@@ -50,7 +50,11 @@
 	</bean>
 	
 	
-
+	<!-- jeon -->
+	
+	<bean id="loginService" class="com.www.preschool.service.LoginServiceImpl"/>
+	<bean id="adminDao" class="com.www.preschool.dao.AdminDaoImpl"/>
+	
 </beans>
 	
 

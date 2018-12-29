@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.preschool.dao.AdminDao">
+	
+	<select id="selectMember" resultType="com.www.preschool.dto.MemberDto" parameterType="com.www.preschool.dto.MemberDto">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_ID = 'admin'
+	</select>
+</mapper>
