@@ -31,33 +31,33 @@ public class LoginController {
 	HttpSession session;
 
 	@RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-	public int login(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
-		
+	public void login(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("connected");
-		response.setHeader("token", 
-				JWTUtil.createToken((String)paramMap.get("testId")));
 		
-		if(session.getAttribute("session_prs")!=null) {
-			session.removeAttribute("session_prs");
+		MemberDto member = new MemberDto();
+		member.setMember_id((String)paramMap.get("adminID"));
+		member.setMember_pwd((String)paramMap.get("adminPWD"));
+		
+		if(loginService.login(member) !=null) {
+			response.setHeader("token", 
+					JWTUtil.createToken((String)paramMap.get("adminID")));
+//			if(session.getAttribute("session_prs")!=null) {
+//				session.setAttribute("session_prs",);
+//			}
 		}
-
-		//
-		//MemberDto session_prs = loginService.login(member);
-
-//		if (session_prs != null) {
-//			session.setAttribute("session_prs", session_prs);
-//			return 1;
-//		} else {
-//			return 0;
-//		}
-		
 	}
 	
-	@RequestMapping("logout")
+	@RequestMapping("/admin/{adminID}/password")
+	public int updatePwd() {
+		return 1;
+	}
+	
+	@RequestMapping("/admin/{adminID}/logout")
 	public int logout() {
 		session.removeAttribute("session_prs");
 		return 1;
 	}
+	
 
 }
 
