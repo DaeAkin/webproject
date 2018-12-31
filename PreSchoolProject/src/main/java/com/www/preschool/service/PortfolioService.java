@@ -1,6 +1,7 @@
 package com.www.preschool.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,15 +14,18 @@ public interface PortfolioService {
 	
     PortfolioDto select(int portfolio_number);
 	
-	void update(PortfolioDto portfolio);
+	int update(Map<String, Object> paramMap);
 	
-	int insert(PortfolioDto portofolio);
+	int insert(Map<String, Object> paramMap);
 	
+	int delete(Map<String, Object> paramMap);
 	List<PortfolioDto> getAllList();
 	
 	void deleteAllContent();
 
 	PortfolioDto getOnePortfolio(String title);
+	
+	List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no);
 		
 	
 }
