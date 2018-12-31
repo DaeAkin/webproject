@@ -10,10 +10,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 public class JWTUtil {
 	
 	//토큰 생성 HMAC256 인코딩 사용 
-	public static String createToken(String id) {
+	public static String createToken() {
 		
 		try {
-			Algorithm algorithm = Algorithm.HMAC256(id);
+			//토큰 발급
+			Algorithm algorithm = Algorithm.HMAC256("pre");
 			String token = JWT.create()
 					.withIssuer("preschool")
 //					.withClaim("name", "id Test")
@@ -31,11 +32,13 @@ public class JWTUtil {
 	}
 	
 	
-	public static void verifyToken(String token) {
+	// 토큰 인증 
+	// 
+	public static Boolean verifyToken(String token) {
 			try {
 			
 			
-			Algorithm algorithm = Algorithm.HMAC256(token);
+			Algorithm algorithm = Algorithm.HMAC256("pre");
 			System.out.println(token);
 			JWTVerifier verifier = JWT.require(algorithm)
 					.withIssuer("preschool") // 생성해준 사람 
@@ -43,8 +46,13 @@ public class JWTUtil {
 //					.acceptExpiresAt(1)
 					.build();
 			DecodedJWT jwf = verifier.verify(token);
+			//false 면 정상
+			return false;
+			
 		} catch (JWTVerificationException e) {
 			System.out.println("토큰 오류");
+			//true 면 실패 
+			return true;
 		}
 		
 	}

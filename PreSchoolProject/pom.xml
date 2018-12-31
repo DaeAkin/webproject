@@ -22,6 +22,14 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!--  spring interceptor -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>${org.springframework-version}</version>
+	</dependency>	
+		<!--  end spring interceptor -->
 
 		<!-- Spring -->
 		<dependency>
