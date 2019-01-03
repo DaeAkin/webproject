@@ -46,13 +46,13 @@ public class JWTUtil {
 //					.acceptExpiresAt(1)
 					.build();
 			DecodedJWT jwf = verifier.verify(token);
-			//false 면 정상
-			return false;
+			
+			return true;
 			
 		} catch (JWTVerificationException e) {
 			System.out.println("토큰 오류");
-			//true 면 실패 
-			return true;
+			//
+			return false;
 		}
 		
 	}

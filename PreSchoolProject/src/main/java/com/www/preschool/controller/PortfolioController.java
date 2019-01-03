@@ -1,5 +1,7 @@
 package com.www.preschool.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,12 @@ public class PortfolioController {
 	PortfolioService portfolioService;
 
 	@RequestMapping("/test")
-	public Map<String, Object> testMethod() {
+	public Map<String, Object> testMethod(@RequestBody Map<String, Object> paramMap,
+			HttpServletRequest request,HttpServletResponse response) {
+		
+		System.out.println("---- testMethod ----");
+		
+		System.out.println("Controller Token : " + paramMap.get("token"));
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		returnMap.put("test", "test!!");
@@ -30,6 +37,30 @@ public class PortfolioController {
 		return returnMap;
 		
 	}
+	
+	@RequestMapping("/testtest")
+	public Map<String, Object> testtestMethod(@RequestBody Map<String, Object> paramMap,
+			HttpServletRequest request,HttpServletResponse response) {
+		
+		System.out.println("---- testtestMethod ----");
+		try {
+			InputStream inputStream = request.getInputStream();
+			
+			System.out.println(inputStream.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Controller Token : " + paramMap.get("token"));
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("test", "test!!");
+		
+		return returnMap;
+		
+	}
+	
+	
 	
 	@RequestMapping("/portfolio/add")
 	public Map<String, Object> addPortfolio(@RequestBody Map<String, Object> paramMap,
