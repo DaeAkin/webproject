@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
+import org.springframework.mock.web.MockFilterChain;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -37,6 +38,30 @@ public class JWFTest {
 		
 	}
 	
+	
+	@Test
+	public void isContained() {
+		String token1 = JWTUtil.createToken("as");
+		
+		String token2 = JWTUtil.createToken("ab");
+		
+		System.out.println(token1);
+		
+		System.out.println(token2);
+		
+		JWTUtil.verifyToken(token1);
+		
+		JWTUtil.verifyToken(token2);
+	}
+	
+	
+	@Test
+	public void testSomethingAboutJWTDoFilter()  {
+		String token_id = JWTUtil.createToken();
+		
+		System.out.println("id의 토큰 : " + token_id);
+		
+	}
 
 	
 	

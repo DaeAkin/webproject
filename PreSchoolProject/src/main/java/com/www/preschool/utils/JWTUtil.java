@@ -1,5 +1,8 @@
 package com.www.preschool.utils;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -10,15 +13,22 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 public class JWTUtil {
 	
 	//토큰 생성 HMAC256 인코딩 사용 
-	public static String createToken() {
+	public static String createToken(String id) {
+		
+		//Create the token with a validity of 15 minutes and client context (fingerprint) information
+		Calendar c = Calendar.getInstance();
+		Date now = c.getTime();
+		c.add(Calendar.MINUTE, 15);
+		Date expirationDate = c.getTime();
 		
 		try {
 			//토큰 발급
 			Algorithm algorithm = Algorithm.HMAC256("pre");
 			String token = JWT.create()
 					.withIssuer("preschool")
+					.withSubject(id)
 //					.withClaim("name", "id Test")
-//					.withExpiresAt(new Date(1))
+					.withExpiresAt(expirationDate) // 15분후 만료
 					
 					
 					.sign(algorithm);
