@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
+@Entity
 //getter, setter 자동생성
 @Data
 //파라미터가 없는 기본 생성자 생
@@ -24,29 +24,31 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 //모든 필드를 생성자에 넣어줌 
 @AllArgsConstructor
-@Entity
-@Table(appliesTo = "MEMBER")
+//@Entity
+//@Table(appliesTo = "MEMBER")
 public class MemberDto {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="MEMBER_ID")
-	private String memberId;
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@Column(name="MEMBER_ID")
+	private String member_id;
 	
-	@Column(name="MEMBER_NAME")
-	private String memberName;
+	private String member_pwd;
 	
-	@Column(name="MEMBER_JOIN_DT")
-	private String memberJoinDt;
-	
-	@Column(name="MEMBER_LASTLOGIN_DT")
-	private String memberLastloginDt;
-	
-	@Column(name="APPLY_GRADE_NM")
-	private String applyGradeNm;
-	
-	@Column(name="APPLY_GRADE_DT")
-	private String applyGradeDt;
+//	@Column(name="MEMBER_NAME")
+//	private String memberName;
+//	
+//	@Column(name="MEMBER_JOIN_DT")
+//	private String memberJoinDt;
+//	
+//	@Column(name="MEMBER_LASTLOGIN_DT")
+//	private String memberLastloginDt;
+//	
+//	@Column(name="APPLY_GRADE_NM")
+//	private String applyGradeNm;
+//	
+//	@Column(name="APPLY_GRADE_DT")
+//	private String applyGradeDt;
 }
 	
 	

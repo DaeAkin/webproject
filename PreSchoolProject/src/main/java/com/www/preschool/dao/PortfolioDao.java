@@ -1,19 +1,23 @@
 package com.www.preschool.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.www.preschool.dto.PortfolioDto;
 
 public interface PortfolioDao {
-	int addPortofolio(PortfolioDto portofolio);
+	int addPortofolio(Map<String, Object> paramMap);
 	
 	List<PortfolioDto> getAllList();
 	
-	<T> void deleteAllContent();
+	void deleteAllContent();
 	
 	
+	int delete(Map<String, Object> paramMap);
+	int updatePortfolio(Map<String, Object> paramMap);
 	
-	<T> void updatePortfolio(PortfolioDto portfolio);
 	PortfolioDto getOnePortfolio(int portfolio_number);
-
+	
+	
+	List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no);
 }

@@ -1,7 +1,9 @@
 package com.www.preschool.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,14 +13,15 @@ import com.www.preschool.dao.PortfolioDaoImpl;
 import com.www.preschool.dto.PortfolioDto;
 import com.www.preschool.utils.ImageUploadUtil;
 
-@Service
+@Service("portfolioService")
 public class PortfolioServiceImpl implements PortfolioService {
 
 	@Autowired
 	ImageUploadUtil imageUploadUtil;
 	
+	
 	@Autowired
-	PortfolioDao portfolioDao = new PortfolioDaoImpl();
+	PortfolioDao portfolioDao;
 	
 	@Override
 	public void imageUpload(MultipartFile file) {
@@ -33,16 +36,19 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 	
 	@Override
-	public void update(PortfolioDto portfolio) {
+	public int update(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
 		System.out.println("update success");
-		portfolioDao.updatePortfolio(portfolio);;
+		return portfolioDao.updatePortfolio(paramMap);
 	}
 
 	@Override
-	public int insert(PortfolioDto portofolio) {
+	public int insert(Map<String, Object> paramMap) {
 		System.out.println("insert service ");
-		return portfolioDao.addPortofolio(portofolio);
+		
+		portfolioDao.addPortofolio(paramMap);
+		
+		return ((Long)paramMap.get("no")).intValue();
 	}
 
 	@Override
@@ -61,6 +67,22 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public PortfolioDto getOnePortfolio(String title) {
 		// TODO Auto-generated method stub
 		return portfolioDao.getOnePortfolio(title);
+	}
+
+	@Override
+	public List<PortfolioDto> getOnePortfolioWtihChildren_no(int children_no) {
+		// TODO Auto-generated method stub
+		System.out.println("portfolioDao : " + portfolioDao);
+		System.out.println("ImageUtils " + imageUploadUtil);
+		return portfolioDao.getOnePortfolioWtihChildren_no(children_no);
+	}
+
+	@Override
+	public int delete(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		System.out.println("---- deleteService ----");
+		System.out.println(paramMap.get("no"));
+		return portfolioDao.delete(paramMap);
 	}
 
 	
