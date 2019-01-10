@@ -33,11 +33,22 @@ public class JWTFilter implements Filter{
 //		 request = new JsonRequestWrapper((HttpServletRequest) request);
 //		 Wrapper 생성.
 		JsonRequestWrapper jrw = new JsonRequestWrapper((HttpServletRequest)request);
-			System.out.println("---- doFilter ----");
 			
-		Map<String, Object> bodyMap = jrw.jsonToMap();
+		System.out.println("---- doFilter ----");
 		
-		System.out.println("Token : " + bodyMap.get("token"));
+		System.out.println("header : " + jrw.getHeader("token"));
+		
+		String loginToken = jrw.getHeader("token");
+		
+		JWTUtil.verifyToken(loginToken);
+			
+			
+		
+		
+		
+//		Map<String, Object> bodyMap = jrw.jsonToMap();
+		
+//		System.out.println("Token : " + bodyMap.get("token"));
 			
 		
 		

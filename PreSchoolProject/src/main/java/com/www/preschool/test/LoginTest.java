@@ -1,5 +1,6 @@
 package com.www.preschool.test;
 
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,10 +17,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.www.preschool.dto.MemberDto;
+import com.www.preschool.exception.TokeninvalidException;
 import com.www.preschool.service.LoginService;
 import com.www.preschool.utils.JWTFilter;
 
@@ -55,21 +59,77 @@ public class LoginTest {
 		member.setMember_pwd("admin");
 		
 		
-		loginService.login(member);
+		String loginToken = loginService.login(member);
+//		String jsonToken = " { token : " + loginToken + "}";
 		
 		
-	    HttpServletRequest httpServletRequest = mock(HttpServletRequest.class);
+		
+		System.out.println("---- httpServletRequest -----");
+//	    HttpServletRequest httpServletRequest = mock(HttpServletRequest.class);
+	    MockHttpServletRequest request = new MockHttpServletRequest();
+	    // 위에서 로그인한 사람의 토큰을 헤더에 넣어줌.
+	    request.addHeader("token", loginToken);
 	    
-	    HttpServletResponse httpServletResponse = mock(HttpServletResponse.class);
+	    
+//	    HttpServletResponse httpServletResponse = mock(HttpServletResponse.class);
+	    MockHttpServletResponse response = new MockHttpServletResponse();
+	    
 	    FilterChain filterChain = mock(FilterChain.class);
 	    // mock the getRequestURI() response
 //	    when(httpServletRequest.getRequestURI()).thenReturn("/otherurl.jsp");
-
+	    //  JWT필터 생성
 	   JWTFilter JWTfilter = new JWTFilter();
-	    JWTfilter.doFilter(httpServletRequest, httpServletResponse,
+	   // 필터에 request와 response를 넘겨준다.
+	    JWTfilter.doFilter(request, response,
 	            filterChain);
 
 	    // verify if a sendRedirect() was performed with the expected value
 //	    verify(httpServletResponse).sendRedirect("/maintenance.jsp");
+	    
+	   
+	    
+	}
+	
+	//해당 클래스 Exception이 나올것으로 예상. 
+	// 밑에의 Exception이 떠도 해당 코드는 문제가 없음. 
+	@Test(expected=TokeninvalidException.class)
+	//토큰 인증 실패 케이스
+	public void JWTTestWithJWTFilterWithError() throws IOException, ServletException {
+		 // create the objects to be mocked
+		
+		MemberDto member = new MemberDto();
+		member.setMember_id("admin");
+		member.setMember_pwd("admin");
+		
+		
+		String loginToken = loginService.login(member);
+
+		
+		loginToken +="a";
+		
+		System.out.println("---- httpServletRequest -----");
+
+	    MockHttpServletRequest request = new MockHttpServletRequest();
+	    // 위에서 로그인한 사람의 토큰을 헤더에 넣어줌.
+	    request.addHeader("token", loginToken);
+	    
+	    
+
+	    MockHttpServletResponse response = new MockHttpServletResponse();
+	    
+	    FilterChain filterChain = mock(FilterChain.class);
+
+
+	    //  JWT필터 생성
+	   JWTFilter JWTfilter = new JWTFilter();
+	   // 필터에 request와 response를 넘겨준다.
+	    JWTfilter.doFilter(request, response,
+	            filterChain);
+
+
+
+	    
+	   
+	    
 	}
 }

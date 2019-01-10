@@ -19,12 +19,13 @@ public class LoginServiceImpl implements LoginService {
 	
 	//로그인
 	@Override
-	public MemberDto login(MemberDto member) {
+	public String login(MemberDto member) {
 		MemberDto newMember = adminDao.login(member);
+		String createdToken = null;
 		
 		// 로그인이 성공 되면
 		if(newMember != null) {
-			String createdToken = 
+			createdToken = 
 					JWTUtil.createToken(member.getMember_id());
 		
 			System.out.println("생성된 토큰 : " + createdToken);
@@ -35,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		 
-		return newMember;
+		return createdToken;
  	}
 	
 
