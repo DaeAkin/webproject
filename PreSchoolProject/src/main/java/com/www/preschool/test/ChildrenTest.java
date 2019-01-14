@@ -1,6 +1,8 @@
 package com.www.preschool.test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,53 +11,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.www.preschool.dao.JChildrenDao;
 import com.www.preschool.dto.ChildrenDto;
+import com.www.preschool.dto.JChildrenDto;
 import com.www.preschool.service.ChildrenService;
 import com.www.preschool.service.ChildrenServiceImpl;
+import com.www.preschool.service.JChildrenService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "context-testContext.xml")
 public class ChildrenTest {
 	
-	ChildrenDto child;
+	JChildrenDto child;
 	
 	@Autowired
-	ChildrenService childrenService;
+	JChildrenService jchildrenService;
 						
+	@Autowired
+	JChildrenDao jchildrenDao;
 	
 	@Before
 	public void setUp() {
-		child = new ChildrenDto(1, 
-				"name", 2, true, "01011112222", "test.png");
 	}
 	
 	
 	@Test
 	public void addAndGet() {
-		//DB테이블 저눕 삭제
-		childrenService.deleteAllContent();
-		
-		//데이터 1개 주입
-		childrenService.insert(child);
-		
-		List<ChildrenDto> result = 
-				childrenService.getAllList();
-		
-		for (ChildrenDto childrenDto : result) {
-			System.out.println(childrenDto.toString());
-		}
-		
-		List<ChildrenDto> result2 = 
-				childrenService.getchildrenWithTeacherNo(String.valueOf(child.getTeacher_no()));
-		
-		for (ChildrenDto childrenDto : result2) {
-			System.out.println(childrenDto.toString());
-		}
+		System.out.println("hi");
 		
 		
+		//jchildrenService.deleteAllChildren();
+		child = new JChildrenDto(3, 3, "john",6,false,"01033333333","test.url");
 		
+		//jchildrenService.addChild(child);
 		
-		
+		child.setName("chris");
+		//jchildrenService.updateChildren(child);
+		//jchildrenService.addChild(child.to);	
+		System.out.println(jchildrenDao.getChild(1));
+		//System.out.println(child2.getName());
 	}
 
 }
