@@ -30,6 +30,14 @@ public class LoginController {
 	@Resource
 	HttpSession session;
 
+	@RequestMapping(value = "/testaa" , produces = "application/json; charset=utf-8")
+	public void testaa(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("---- testaa ----");
+		
+		System.out.println("child_no : " + paramMap.get("child_no"));
+	}
+	
 	@RequestMapping(value = "/admin/login", method = RequestMethod.POST)
 	public void login(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("connected");

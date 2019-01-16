@@ -1,6 +1,7 @@
 package com.www.preschool.utils;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -32,11 +33,24 @@ public class JWTFilter implements Filter{
 //		 request = new JsonRequestWrapper((HttpServletRequest) request);
 //		 Wrapper 생성.
 		JsonRequestWrapper jrw = new JsonRequestWrapper((HttpServletRequest)request);
-			System.out.println("---- doFilter ----");
+			
+		System.out.println("---- doFilter ----");
+		
+		System.out.println("header : " + jrw.getHeader("token"));
+		
+		String loginToken = jrw.getHeader("token");
+		
+		JWTUtil.verifyToken(loginToken);
+			
 			
 		
+		
+		
+//		Map<String, Object> bodyMap = jrw.jsonToMap();
+		
+//		System.out.println("Token : " + bodyMap.get("token"));
 			
-	
+		
 		
 		chain.doFilter(jrw, response);
 	}
